@@ -1,8 +1,8 @@
-﻿using ACGSS.Models;
+﻿using ACGSS.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace ACGSS.Controllers
+namespace ACGSS.Web.Controllers
 {
     public class HomeController : Controller
     {

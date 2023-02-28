@@ -1,4 +1,4 @@
-namespace ACGSS.Models
+namespace ACGSS.Web.Models
 {
     public class ErrorViewModel
     {
