@@ -1,4 +1,6 @@
-﻿namespace ACGSS.Web.Models;
+﻿using ACGSS.Domain.Enums;
+
+namespace ACGSS.Web.Models;
 
 public partial class User
 {
@@ -18,5 +20,5 @@ public partial class User
 
     public DateTime ModifiedDate { get; set; }
 
-    public bool IsActive { get; set; }
+    public UserStatus IsActive { get; set; }
 }
