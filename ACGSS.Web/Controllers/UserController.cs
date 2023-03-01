@@ -21,7 +21,7 @@ namespace ACGSS.Web.Controllers
 
             return users != null ?
                         View(users) :
-                        Problem("Entity 'User' is null.");
+                        Problem("Entity 'Users' is null.");
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -114,13 +114,16 @@ namespace ACGSS.Web.Controllers
             var users = await _userService.GetUsers();
             if (users == null)
             {
-                return Problem("Entity 'User' is null.");
+                return Problem("Entity 'Users' is null.");
             }
 
             var user = await _userService.GetUser(id);
+            user.ModifiedDate = DateTime.Now;
+            user.IsActive = UserStatus.Inactive;
+
             if (user != null)
             {
-                await _userService.DeleteUser(user.Id);
+                await _userService.UpdateUser(user);
             }
 
             return RedirectToAction(nameof(Index));

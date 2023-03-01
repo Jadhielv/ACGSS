@@ -1,9 +1,11 @@
 ﻿using ACGSS.Domain.DTOs;
 using ACGSS.Domain.Entities;
+using ACGSS.Domain.Enums;
 using ACGSS.Domain.Exceptions;
 using ACGSS.Domain.Repositories;
 using ACGSS.Domain.Services;
 using AutoMapper;
+using System.Linq.Expressions;
 
 namespace ACGSS.Application.Services
 {
@@ -63,7 +65,8 @@ namespace ACGSS.Application.Services
 
         public async Task<IEnumerable<UserDto>> GetUsers()
         {
-            var users = await _unitOfWork.UserRepository.GetAllAsync();
+            var users = await _unitOfWork.UserRepository.GetAllAsync(new List<Expression<Func<User, bool>>>()
+                                                                    { x => x.IsActive == UserStatus.Active });
             var usersDto = _mapper.Map<IEnumerable<UserDto>>(users);
 
             return usersDto;
