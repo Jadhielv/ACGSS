@@ -15,7 +15,6 @@ The solution design focuses on a basic Domain Driven Design techniques and imple
 Data validation using [FluentValidation](https://github.com/JeremySkinner/FluentValidation)
 
 ## How to run application: 
-[(Backend)](https://github.com/Jadhielv/ITL/tree/master/Backend)
 
 1. Create empty database, name: **`ACGSS`**.
 2. Execute [migrations](https://github.com/Jadhielv/ACGSS/tree/main/ACGSS.Infrastructure/Migrations).
