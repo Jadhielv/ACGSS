@@ -1,4 +1,5 @@
 ﻿using ACGSS.Domain.DTOs;
+using ACGSS.Domain.Enums;
 using ACGSS.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -42,8 +43,12 @@ namespace ACGSS.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Address,PhoneNumber,Email,CreatedDate,ModifiedDate,IsActive")] UserDto userDto)
+        public async Task<IActionResult> Create([Bind("FirstName,LastName,Address,PhoneNumber,Email")] UserDto userDto)
         {
+            userDto.CreatedDate = DateTime.Now;
+            userDto.ModifiedDate = DateTime.Now;
+            userDto.IsActive = UserStatus.Active;
+
             if (ModelState.IsValid)
             {
                 await _userService.AddUser(userDto);
@@ -66,10 +71,7 @@ namespace ACGSS.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Address,PhoneNumber,Email,CreatedDate,ModifiedDate,IsActive")] UserDto userDto)
         {
-            if (id != userDto.Id)
-            {
-                return NotFound();
-            }
+            userDto.ModifiedDate = DateTime.Now;
 
             if (ModelState.IsValid)
             {
