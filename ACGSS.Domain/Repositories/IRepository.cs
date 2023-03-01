@@ -7,7 +7,8 @@ namespace ACGSS.Domain.Repositories
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
-        Task<T> GetFirstAsync(Expression<Func<T, bool>> expression);
-        Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression);
+        Task<T> GetFirstAsync(Expression<Func<T, bool>> predicates);
+        Task<IEnumerable<T>> GetAllAsync(IEnumerable<Expression<Func<T, bool>>> predicates = null);
+        Task<bool> AnyAsync(Expression<Func<T, bool>> predicates);
     }
 }

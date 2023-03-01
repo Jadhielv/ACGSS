@@ -1,4 +1,5 @@
 ﻿using ACGSS.Domain.Repositories;
+using ACGSS.Infrastructure.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -15,8 +16,12 @@ namespace ACGSS.Infrastructure.Repositories
 
         public async Task DeleteAsync(T entity) => await Task.Run(() => { _dbSet.Remove(entity); });
 
-        public async Task<T> GetFirstAsync(Expression<Func<T, bool>> expression) => await _dbSet.AsNoTracking().FirstOrDefaultAsync(expression);
+        public async Task<T> GetFirstAsync(Expression<Func<T, bool>> predicates) => await _dbSet.AsNoTracking().FirstOrDefaultAsync(predicates);
 
-        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression) => await _dbSet.AsNoTracking().Where(expression).ToListAsync();
+        public async Task<IEnumerable<T>> GetAllAsync(IEnumerable<Expression<Func<T, bool>>> predicates) => await _dbSet.AsNoTracking()
+                                                                                                                        .Filter(predicates)
+                                                                                                                        .ToListAsync();
+
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicates) => await _dbSet.AnyAsync(predicates);
     }
 }
