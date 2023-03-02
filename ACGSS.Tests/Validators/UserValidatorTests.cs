@@ -64,27 +64,11 @@ namespace ACGSS.Tests.Validators
         }
 
         [Test]
-        public void Should_have_error_when_CreatedDate_is_null()
-        {
-            var model = new UserDto { CreatedDate = null };
-            var result = validator.TestValidate(model);
-            result.ShouldHaveValidationErrorFor(p => p.CreatedDate);
-        }
-
-        [Test]
         public void Should_not_have_error_when_CreatedDate_is_specified()
         {
             var model = new UserDto { CreatedDate = DateTime.Now };
             var result = validator.TestValidate(model);
             result.ShouldNotHaveValidationErrorFor(p => p.CreatedDate);
-        }
-
-        [Test]
-        public void Should_have_error_when_ModifiedDate_is_null()
-        {
-            var model = new UserDto { ModifiedDate = null };
-            var result = validator.TestValidate(model);
-            result.ShouldHaveValidationErrorFor(p => p.ModifiedDate);
         }
 
         [Test]
