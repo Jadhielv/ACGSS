@@ -16,10 +16,11 @@ Data validation using [FluentValidation](https://github.com/JeremySkinner/Fluent
 
 ## How to run application: 
 
-1. Create empty database, name: **`ACGSS`**
-2. Set connection string (in [appsettings.json](https://github.com/Jadhielv/ACGSS/blob/main/ACGSS.Web/appsettings.json) or by user secrets mechanism)
+1. Create empty Database, name: **`ACGSS`**
+2. Set Connection String (in [appsettings.json](https://github.com/Jadhielv/ACGSS/blob/main/ACGSS.Web/appsettings.json#L9) or by user secrets mechanism)
 3. Execute [migrations](https://github.com/Jadhielv/ACGSS/tree/main/ACGSS.Infrastructure/Migrations).
-4. Run .. .
+4. Set Authentication | Twilio - SendGrid (in [appsettings.json](https://github.com/Jadhielv/ACGSS/blob/main/ACGSS.Web/appsettings.json#L12))
+5. Run .. .
 
 ## ¡Give a Star!
 
