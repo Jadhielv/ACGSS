@@ -3,6 +3,7 @@ using ACGSS.Domain.DTOs;
 using ACGSS.Domain.Entities;
 using ACGSS.Domain.Exceptions;
 using ACGSS.Domain.Repositories;
+using ACGSS.Domain.Services;
 using AutoMapper;
 using Moq;
 using System.Linq.Expressions;
@@ -26,7 +27,7 @@ namespace ACGSS.Tests.Services
                 Email = "test@gmail.com"
             };
 
-            var service = new UserService(unitOfWorkMock.Object, null);
+            var service = new UserService(unitOfWorkMock.Object, null, null);
 
             userRepositoryMock.Setup(x => x.AnyAsync(It.IsAny<Expression<Func<User, bool>>>()))
                 .ReturnsAsync(false);
@@ -45,6 +46,7 @@ namespace ACGSS.Tests.Services
             var unitOfWorkMock = new Mock<IUnitOfWork>();
             var userRepositoryMock = new Mock<IUserRepository>();
             var mapperMock = new Mock<IMapper>();
+            var emailSenderServiceMock = new Mock<IEmailSenderService>();
 
             var user = new UserDto
             {
@@ -54,7 +56,7 @@ namespace ACGSS.Tests.Services
                 Email = "test@gmail.com"
             };
 
-            var service = new UserService(unitOfWorkMock.Object, mapperMock.Object);
+            var service = new UserService(unitOfWorkMock.Object, mapperMock.Object, emailSenderServiceMock.Object);
 
             userRepositoryMock.Setup(v => v.AnyAsync(It.IsAny<Expression<Func<User, bool>>>()))
                 .ReturnsAsync(true);
@@ -77,7 +79,7 @@ namespace ACGSS.Tests.Services
             var unitOfWorkMock = new Mock<IUnitOfWork>();
             var userRepositoryMock = new Mock<IUserRepository>();
 
-            var service = new UserService(unitOfWorkMock.Object, null);
+            var service = new UserService(unitOfWorkMock.Object, null, null);
 
             userRepositoryMock.Setup(x => x.AnyAsync(It.IsAny<Expression<Func<User, bool>>>()))
                 .ReturnsAsync(false);
@@ -108,7 +110,7 @@ namespace ACGSS.Tests.Services
 
             var userDto = new UserDto();
 
-            var service = new UserService(unitOfWorkMock.Object, mapperMock.Object);
+            var service = new UserService(unitOfWorkMock.Object, mapperMock.Object, null);
 
             userRepositoryMock.Setup(x => x.AnyAsync(It.IsAny<Expression<Func<User, bool>>>()))
                 .ReturnsAsync(true);
@@ -136,7 +138,7 @@ namespace ACGSS.Tests.Services
             var unitOfWorkMock = new Mock<IUnitOfWork>();
             var userRepositoryMock = new Mock<IUserRepository>();
 
-            var service = new UserService(unitOfWorkMock.Object, null);
+            var service = new UserService(unitOfWorkMock.Object, null, null);
 
             userRepositoryMock.Setup(v => v.AnyAsync(It.IsAny<Expression<Func<User, bool>>>()))
                 .ReturnsAsync(false);
@@ -155,6 +157,7 @@ namespace ACGSS.Tests.Services
             var unitOfWorkMock = new Mock<IUnitOfWork>();
             var userRepositoryMock = new Mock<IUserRepository>();
             var mapperMock = new Mock<IMapper>();
+            var emailSenderServiceMock = new Mock<IEmailSenderService>();
             const int userId = 1;
 
             var user = new User
@@ -165,7 +168,7 @@ namespace ACGSS.Tests.Services
                 Email = "test@gmail.com"
             };
 
-            var service = new UserService(unitOfWorkMock.Object, mapperMock.Object);
+            var service = new UserService(unitOfWorkMock.Object, mapperMock.Object, emailSenderServiceMock.Object);
 
             userRepositoryMock.Setup(v => v.AnyAsync(It.IsAny<Expression<Func<User, bool>>>()))
                 .ReturnsAsync(true);
