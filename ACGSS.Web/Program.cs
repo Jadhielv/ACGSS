@@ -22,11 +22,11 @@ builder.Services.AddDbContext<EFContext>(options =>
 
 builder.Services.SetupUnitOfWork();
 
-builder.ServicesAddAutoMapper(
-            Assembly.GetExecutingAssembly()
-                .GetReferencedAssemblies()
-                .Select(Assembly.Load)
-                .ToArray());
+builder.Services.AddAutoMapper(
+    Assembly.GetExecutingAssembly()
+        .GetReferencedAssemblies()
+        .Select(Assembly.Load)
+        .ToArray());
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
