@@ -21,14 +21,8 @@ builder.Services.AddDbContext<EFContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("EFContext")));
 
 builder.Services.SetupUnitOfWork();
-
-builder.Services.AddAutoMapper(
-    Assembly.GetExecutingAssembly().GetReferencedAssemblies()
-        .Select(Assembly.Load)
-        .ToArray());
-
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IUserService, UserService>();
-
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddTransient<IEmailSenderService, EmailSender>();
 
