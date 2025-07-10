@@ -22,10 +22,7 @@ builder.Services.AddDbContext<EFContext>(options =>
 
 builder.Services.SetupUnitOfWork();
 
-builder.Services.AddAutoMapper(
-    Assembly.GetExecutingAssembly().GetReferencedAssemblies()
-        .Select(Assembly.Load)
-        .ToArray());
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddScoped<IUserService, UserService>();
 
