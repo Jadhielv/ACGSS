@@ -36,7 +36,7 @@ namespace ACGSS.Tests.Services
                 .Returns(userRepositoryMock.Object);
 
             // Act => Assert
-            Assert.ThrowsAsync<ConflictException>(() => service.UpdateUser(user), "The user doesn't exist.");
+            Assert.That(async () => await service.UpdateUser(user), Throws.TypeOf<ConflictException>(), "The user doesn't exist.");
         }
 
         [Test]
@@ -88,7 +88,7 @@ namespace ACGSS.Tests.Services
                 .Returns(userRepositoryMock.Object);
 
             // Act => Assert
-            Assert.ThrowsAsync<ConflictException>(() => service.GetUser(1), "The user doesn't exist.");
+            Assert.That(async () => await service.GetUser(1), Throws.TypeOf<ConflictException>(), "The user doesn't exist.");
         }
 
         [Test]
@@ -147,7 +147,7 @@ namespace ACGSS.Tests.Services
                 .Returns(userRepositoryMock.Object);
 
             // Act => Assert
-            Assert.ThrowsAsync<ConflictException>(() => service.DeleteUser(1), "The user doesn't exist.");
+            Assert.That(async () => await service.DeleteUser(1), Throws.TypeOf<ConflictException>(), "The user doesn't exist.");
         }
 
         [Test]
