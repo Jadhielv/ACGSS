@@ -52,15 +52,7 @@ namespace ACGSS.Web.Controllers
             userDto.ModifiedDate = DateTime.Now;
             userDto.IsActive = UserStatus.Active;
 
-            var result = await _validator.ValidateAsync(userDto);
-
-            if (!result.IsValid)
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
-                }
-            }
+            await AddValidationErrorsAsync(userDto);
 
             if (ModelState.IsValid)
             {
@@ -86,15 +78,7 @@ namespace ACGSS.Web.Controllers
         {
             userDto.ModifiedDate = DateTime.Now;
 
-            var result = await _validator.ValidateAsync(userDto);
-
-            if (!result.IsValid)
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
-                }
-            }
+            await AddValidationErrorsAsync(userDto);
 
             if (ModelState.IsValid)
             {
@@ -150,6 +134,19 @@ namespace ACGSS.Web.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        private async Task AddValidationErrorsAsync(UserDto userDto)
+        {
+            var result = await _validator.ValidateAsync(userDto);
+
+            if (!result.IsValid)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+            }
         }
 
         private bool UserExists(int id)
