@@ -5,7 +5,6 @@ using ACGSS.Infrastructure.Database;
 using ACGSS.Infrastructure.Extensions;
 using ACGSS.Infrastructure.Mail;
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -14,7 +13,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddMvc();
-builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblies(Assembly.GetExecutingAssembly().GetReferencedAssemblies().Select(Assembly.Load));
 
 builder.Services.AddDbContext<EFContext>(options =>

@@ -1,6 +1,7 @@
 ﻿using ACGSS.Domain.DTOs;
 using ACGSS.Domain.Enums;
 using ACGSS.Domain.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,10 +10,12 @@ namespace ACGSS.Web.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IValidator<UserDto> _validator;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IValidator<UserDto> validator)
         {
             _userService = userService;
+            _validator = validator;
         }
 
         public async Task<IActionResult> Index()
@@ -49,6 +52,16 @@ namespace ACGSS.Web.Controllers
             userDto.ModifiedDate = DateTime.Now;
             userDto.IsActive = UserStatus.Active;
 
+            var result = await _validator.ValidateAsync(userDto);
+
+            if (!result.IsValid)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 await _userService.AddUser(userDto);
@@ -72,6 +85,16 @@ namespace ACGSS.Web.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Address,PhoneNumber,Email,CreatedDate,ModifiedDate,IsActive")] UserDto userDto)
         {
             userDto.ModifiedDate = DateTime.Now;
+
+            var result = await _validator.ValidateAsync(userDto);
+
+            if (!result.IsValid)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+            }
 
             if (ModelState.IsValid)
             {
