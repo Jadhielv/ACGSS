@@ -26,6 +26,7 @@
     <ProjectReference Include="..\ACGSS.Application\ACGSS.Application.csproj" />
     <ProjectReference Include="..\ACGSS.Domain\ACGSS.Domain.csproj" />
     <ProjectReference Include="..\ACGSS.Infrastructure\ACGSS.Infrastructure.csproj" />
+    <ProjectReference Include="..\ACGSS.Web\ACGSS.Web.csproj" />
   </ItemGroup>
 
 </Project>

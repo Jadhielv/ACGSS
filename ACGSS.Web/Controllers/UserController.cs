@@ -80,6 +80,11 @@ namespace ACGSS.Web.Controllers
 
             await AddValidationErrorsAsync(userDto);
 
+            if (id != userDto.Id)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
                 try
