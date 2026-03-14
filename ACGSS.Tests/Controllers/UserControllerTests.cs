@@ -44,6 +44,7 @@ namespace ACGSS.Tests.Controllers
 
             // Assert
             Assert.That(result, Is.TypeOf<NotFoundResult>());
+            _userServiceMock.Verify(u => u.UpdateUser(It.IsAny<UserDto>()), Times.Never());
         }
     }
 }

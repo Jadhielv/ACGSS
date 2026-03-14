@@ -76,14 +76,14 @@ namespace ACGSS.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Address,PhoneNumber,Email,CreatedDate,ModifiedDate,IsActive")] UserDto userDto)
         {
-            userDto.ModifiedDate = DateTime.Now;
-
-            await AddValidationErrorsAsync(userDto);
-
             if (id != userDto.Id)
             {
                 return NotFound();
             }
+
+            userDto.ModifiedDate = DateTime.Now;
+
+            await AddValidationErrorsAsync(userDto);
 
             if (ModelState.IsValid)
             {
