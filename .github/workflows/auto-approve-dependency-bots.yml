@@ -1,5 +1,8 @@
 name: Auto Approve and Merge for Dependency Bots
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   pull_request:
     types: [opened, reopened, synchronize]
